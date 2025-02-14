@@ -1,0 +1,232 @@
+.contact-wrapper {
+    min-height: 100vh;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    padding-top: 100px; /* Add space for header */
+  }
+  
+  .contact-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px; /* Reduced padding */
+  }
+  
+  .contact-title {
+    color: rgba(165, 90, 45, 1);
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+  
+  .contact-subtitle {
+    color: #ffffff;
+    font-size: 1.5rem;
+  }
+  
+  .contact-content {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+  }
+  
+  .contact-info {
+    flex: 1;
+    background: rgba(165, 90, 45, 0.2);
+    padding: 30px;
+    border-radius: 15px;
+  }
+  
+  .contact-info h2 {
+    color: rgba(165, 90, 45, 1);
+    margin-bottom: 30px;
+    font-size: 2rem;
+  }
+  
+  .info-item {
+    margin-bottom: 25px;
+  }
+  
+  .info-item h3 {
+    color: rgba(165, 90, 45, 0.9);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  
+  .info-item p {
+    color: #ffffff;
+    line-height: 1.6;
+  }
+  
+  .contact-form-section {
+    flex: 2;
+  }
+  
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 2px solid rgba(165, 90, 45, 0.7);
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.95);
+    color: rgba(165, 90, 45, 1);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    transition: all 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: rgba(165, 90, 45, 0.8);
+    background: white;
+    box-shadow: 0 0 10px rgba(165, 90, 45, 0.3);
+  }
+  
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: rgba(165, 90, 45, 0.6);
+  }
+  
+  .submit-button {
+    padding: 15px 30px;
+    background: rgba(165, 90, 45, 0.8);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-end;
+  }
+  
+  .submit-button:hover {
+    background: rgba(165, 90, 45, 1);
+    transform: translateY(-2px);
+  }
+  
+  .email-link {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .email-link:hover {
+    color: rgba(165, 90, 45, 1);
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 992px) {
+    .contact-wrapper {
+      height: 100vh;
+      overflow-y: auto;
+    }
+  
+    .contact-container {
+      padding-top: 120px; /* Increase padding to accommodate header */
+      height: auto;
+      width: 90%; /* Control container width */
+    }
+  
+    .contact-header {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 40px;
+    }
+  
+    .contact-content {
+      flex-direction: column;
+      gap: 30px;
+      align-items: stretch; /* Stretch children to full width */
+      margin-top: 20px; /* Add space between header and content */
+    }
+  
+    .contact-form-section {
+      width: 100%; /* Take full width */
+    }
+  
+    .contact-form {
+      width: 100%; /* Take full width */
+      max-width: none; /* Remove max-width limitation */
+    }
+  
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      font-size: 16px;
+      box-sizing: border-box; /* Ensure padding doesn't affect width */
+    }
+  
+    .contact-info {
+      margin-bottom: 20px;
+      width: 100%; /* Take full width */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .contact-container {
+      padding-top: 100px; /* Slightly reduce padding for smaller screens */
+      padding: 70px 20px 20px;
+      width: 95%; /* Slightly wider on smaller screens */
+    }
+  
+    .contact-header {
+      margin-bottom: 30px;
+    }
+  
+    .contact-title {
+      font-size: 2.2rem; /* Slightly smaller title */
+    }
+  
+    .form-group input,
+    .form-group textarea {
+      padding: 12px 15px; /* Slightly smaller padding */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .contact-container {
+      padding-top: 90px; /* Further reduce padding for mobile */
+      padding: 60px 15px 20px;
+      width: 100%; /* Full width on mobile */
+    }
+  
+    .contact-header {
+      margin-bottom: 25px;
+    }
+  
+    .contact-title {
+      font-size: 2rem;
+    }
+  
+    .contact-content {
+      gap: 15px;
+    }
+  
+    .contact-info {
+      padding: 20px;
+    }
+  
+    .form-group {
+      margin-bottom: 12px;
+    }
+  
+    .submit-button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+    }
+  }

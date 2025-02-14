@@ -1,0 +1,420 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Noto+Serif+Hentaigana:wght@200..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Page Layout */
+.page {
+  padding: 20px;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* Background Image and Overlay */
+.page::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  background-image: url('assets/favoritebckg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(6px);
+  z-index: -2;
+}
+
+.page::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+
+/* Text Styles */
+.no-dishes {
+  color: white;
+  font-family: "Be Vietnam Pro", serif;
+  font-size: 1.5rem;  /* Reduced from 2rem */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.create-btn {
+  background-color: rgba(165, 90, 45, 0.7); /* Changed color to match home page */
+  color: white;
+  border: none;
+  padding: 15px 40px;  /* Increased padding */
+  border-radius: 10px;  /* Increased border radius */
+  font-family: "Be Vietnam Pro", serif;
+  font-size: 1.5rem;  /* Increased font size */
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.create-btn:hover {
+  color: rgba(165, 90, 45, 1);
+  background-color: white;
+  transform: scale(1.05);
+}
+
+.dishes-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 20vh; /* Reduced from 25vh */
+  transition: padding-top 0.3s ease; /* Smooth transition for padding changes */
+}
+
+/* Center first item when it's the only one (excluding add-recipe-card) */
+.dishes-container:has(.dishes-grid > .dish-card:first-child:last-of-type) {
+  padding-top: 30vh;
+}
+
+.dishes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns by default */
+  gap: 25px;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+/* Remove these styles as they were causing the stacking */
+.dishes-grid:has(> .dish-card:first-child:last-of-type) {
+  display: grid; /* Keep as grid instead of flex */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Return to grid layout when there are multiple items */
+.dishes-grid:has(> .dish-card:nth-child(2)) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+/* Adjust padding when there are more than 3 dishes */
+.dishes-grid:has(> *:nth-child(4)) {
+  margin-top: -5vh; /* Pull content up when there are 4 or more items */
+}
+
+.dishes-grid:has(> *:nth-child(7)) {
+  margin-top: -10vh; /* Pull content up even more when there are 7 or more items */
+}
+
+.dish-card,
+.add-recipe-card {
+  width: 100%; /* Take full width of grid cell */
+  height: 250px;
+  margin: 0; /* Remove margin since we're using gap */
+}
+
+/* Responsive grid layouts */
+@media (max-width: 1200px) {
+  .dishes-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .dishes-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dishes-grid {
+    grid-template-columns: 1fr; /* Single column */
+    max-width: 400px; /* Limit width on mobile */
+    margin: 20px auto;
+  }
+
+  .dish-card,
+  .add-recipe-card {
+    height: 300px; /* Taller cards on mobile */
+  }
+
+  .dish-image {
+    height: 250px; /* Taller images on mobile */
+  }
+}
+
+.dish-card {
+  background: rgba(165, 90, 45, 0.5); /* Updated background color */
+  border-radius: 5px; /* Reduced from 10px */
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  justify-self: center;
+}
+
+.dish-card:hover {
+  transform: translateY(-5px);
+}
+
+.dish-image {
+  width: 100%;
+  height: 200px; /* Increased from 180px */
+  object-fit: cover;
+  object-position: center;
+  display: block; /* Prevent image spacing issues */
+}
+
+.dish-title {
+  padding: 12px;
+  margin: 0;
+  color: white; /* Changed to white */
+  font-family: "Be Vietnam Pro", serif;
+  font-size: 1.1rem;
+  height: 47px; /* Set exact height: 12px padding-top + 23px line-height + 12px padding-bottom */
+  line-height: 23px; /* Set exact line height */
+  overflow: hidden; /* Prevent text overflow */
+  text-overflow: ellipsis; /* Add ellipsis for long titles */
+  white-space: nowrap; /* Keep title on one line */
+}
+
+/* Remove the hover action buttons */
+.dish-actions {
+  display: none; /* Hide all card action buttons */
+}
+
+.dish-card:hover .dish-actions {
+  display: none; /* Ensure buttons stay hidden on hover */
+}
+
+/* Only show actions in the details popup */
+.details-view .dish-actions {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  margin-top: 20px;
+  padding: 15px 0;
+  position: static;
+  opacity: 1;
+  background: none;
+}
+
+.details-view .edit-btn {
+  order: 1;
+}
+
+.details-view .delete-btn {
+  order: 2;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+}
+
+.popup-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.popup-content input,
+.popup-content textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: "Be Vietnam Pro", serif;
+}
+
+.popup-content textarea {
+  min-height: 100px;
+}
+
+.popup-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between; /* Changed from flex-end to space-between */
+}
+
+.edit-btn,
+.delete-btn,
+.submit-btn,
+.cancel-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Be Vietnam Pro", serif;
+}
+
+.edit-btn,
+.delete-btn {
+  background-color: rgba(165, 90, 45, 0.7);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Be Vietnam Pro", serif;
+  transition: all 0.3s ease;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  color: rgba(165, 90, 45, 1);
+  background-color: white;
+  transform: scale(1.05);
+}
+
+.submit-btn {
+  background-color: rgba(165, 90, 45, 0.7);
+  color: white;
+  transition: all 0.3s ease;
+  order: 2; /* Moves the submit/update button to the right */
+}
+
+.submit-btn:hover {
+  color: rgba(165, 90, 45, 1);
+  background-color: white;
+  transform: scale(1.05);
+}
+
+.cancel-btn {
+  background-color: rgba(165, 90, 45, 0.7);
+  color: white;
+  transition: all 0.3s ease;
+  order: 1; /* Moves the cancel button to the left */
+}
+
+.cancel-btn:hover {
+  color: rgba(165, 90, 45, 1);
+  background-color: white;
+  transform: scale(1.05);
+}
+
+.add-recipe-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 5px; /* Match dish-card border-radius */
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  border: 2px dashed rgba(165, 90, 45, 0.7);
+}
+
+.add-recipe-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(165, 90, 45, 1);
+}
+
+.add-recipe-content {
+  text-align: center;
+  color: rgba(165, 90, 45, 0.7);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plus-icon {
+  font-size: 2.5rem;
+  margin-bottom: 4px; /* Reduced spacing */
+}
+
+.add-recipe-content p {
+  font-family: "Be Vietnam Pro", serif;
+  font-size: 1.1rem;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Remove the old add-new class as it's no longer needed */
+.add-new {
+  display: none;
+}
+
+.details-view {
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.popup-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.popup-title {
+  color: rgba(165, 90, 45, 1);
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.popup-details h3 {
+  color: rgba(165, 90, 45, 0.9);
+  margin: 20px 0 10px;
+}
+
+.ingredients-list {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.instructions-list {
+  padding-left: 20px;
+}
+
+.ingredients-list li,
+.instructions-list li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.close-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  background: none;
+  border: none;
+  padding: 5px;
+  line-height: 1;
+  z-index: 1001;
+}
+
+.close-button:hover {
+  color: #000;
+}
